@@ -11,6 +11,4 @@ const state = proxy<{
     },
 });
 
-// devtools(state, { name: "nextjs-boilertemplate", enabled: process.env.NODE_ENV === "development" ? true : false });
-
 export { state, subscribe, useSnapshot };
