@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import { Slot, SplashScreen } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function App() {
@@ -24,7 +25,9 @@ export default function App() {
             <StatusBar style="auto" />
 
             <QueryClientProvider client={queryClient}>
-                <Slot />
+                <SafeAreaView style={{ flex: 1 }}>
+                    <Slot />
+                </SafeAreaView>
             </QueryClientProvider>
         </>
     );
