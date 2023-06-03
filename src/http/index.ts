@@ -7,8 +7,8 @@ export const authRequestEmailVerification = async (data: any) => await $http.pos
 export const authRequestPasswordReset = async (data: any) => await $http.post("/auth/request-password-reset", { email: data.email }).then((res) => res.data);
 export const authResetPassword = async (data: any) => await $http.patch("/auth/reset-password", { userId: data.userId, resetToken: data.resetToken, newPassword: data.newPassword }).then((res) => res.data);
 
-export const userGetMe = async () => $http.get(`/users/get-current`).then((res) => res.data);
-export const userUpdateProfile = async (data: any) => $http.patch(`/users/update-profile`, data).then((res) => res.data);
-export const userUpdatePassword = async (data: any) => $http.patch(`/users/update-password`, data).then((res) => res.data);
+export const userGetMe = async () => $http.get("/users/get-current").then((res) => res.data);
+export const userUpdateProfile = async (data: any) => $http.patch("/users/update-profile", data).then((res) => res.data);
+export const userUpdatePassword = async (data: any) => $http.patch("/users/update-password", data).then((res) => res.data);
 
 export const coreGetConfig = async (key: string) => $http.get(`/core/${key}`).then((res) => res.data);
