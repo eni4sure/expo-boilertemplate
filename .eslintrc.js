@@ -18,7 +18,8 @@ module.exports = {
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
-        "@typescript-eslint/no-explicit-any": "off",
         "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
     },
 };
