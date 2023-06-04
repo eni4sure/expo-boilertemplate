@@ -2,17 +2,18 @@ import { Button, ButtonProps } from "@rneui/base";
 
 interface CustomButtonProp extends ButtonProps {
     // other custom props here
+    type: "solid" | "clear" | "outline";
     title: string | React.ReactElement<object>;
 }
 
-export default function CustomButton({ title, loading = false, disabled = false, ...props }: CustomButtonProp) {
+export default function CustomButton({ loading = false, disabled = false, ...props }: CustomButtonProp) {
     return (
         <Button
             // breaker
             {...props}
-            title={title}
             type={props.type}
             loading={loading}
+            title={props.title}
             disabled={disabled}
             titleStyle={[
                 props.titleStyle,

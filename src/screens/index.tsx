@@ -10,7 +10,7 @@ function App() {
                 <Text>expo-boilertemplate !!</Text>
 
                 <View>
-                    <Button title="Button" />
+                    <Button type="solid" title="Button" />
                 </View>
 
                 <View>
