@@ -1,4 +1,5 @@
 import { CONFIGS } from "../config";
+import { PersistStorage } from "@src/utilities";
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 const baseURL = CONFIGS.BACKEND_BASE_URL;
@@ -13,12 +14,12 @@ const $http: AxiosInstance = axios.create({
 });
 
 $http.interceptors.request.use(async (config: any) => {
-    // const authToken = await persistStorage.getItem("@authToken");
+    const authToken = await PersistStorage.getItem("@/authToken");
 
-    // // If auth-token is available, add it to the Axios API header
-    // if (authToken) {
-    //     config.headers["Authorization"] = `Bearer ${authToken}`;
-    // }
+    // If auth-token is available, add it to the Axios API header
+    if (authToken) {
+        config.headers["Authorization"] = `Bearer ${authToken}`;
+    }
 
     return config;
 });
