@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Stack } from "@src/components";
 import { TextInput, Image, Text, Button } from "@src/components";
 
-export default function App() {
+function App() {
     return (
         <View className="flex-1 justify-center mx-2">
             <Stack direction="column" spacing={20}>
@@ -22,3 +22,5 @@ export default function App() {
         </View>
     );
 }
+
+export default App;
