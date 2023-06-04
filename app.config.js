@@ -99,10 +99,10 @@ module.exports = {
             entitlements: {},
 
             // https://developer.apple.com/documentation/safariservices/supporting_associated_domains
-            associatedDomains: ["applinks:expo-boilertemplate.eni4sure.com"],
+            // associatedDomains: ["applinks:expo-boilertemplate.eni4sure.com"],
 
             // Including this key automatically enables FCM in the standalone app.
-            // googleServicesFile: "./GoogleService-Info.plist",
+            // googleServicesFile: "./service-keys/GoogleService-Info.plist",
         },
 
         android: {
@@ -121,7 +121,7 @@ module.exports = {
             },
 
             // Including this key automatically enables FCM in the standalone app.
-            // googleServicesFile: "./google-services.json",
+            // googleServicesFile: "./service-keys/google-services.json",
         },
     },
 };
