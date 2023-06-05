@@ -12,7 +12,7 @@ interface CustomTextInputProp extends InputProps {
 export default function CustomTextInput({ isPassword, keyboardType, ...props }: CustomTextInputProp) {
     const inputRef = React.createRef<any>();
 
-    const [hideSecureInput, setHideSecureInput] = React.useState<boolean>(props.secureTextEntry || false);
+    const [hideSecureInput, setHideSecureInput] = React.useState<boolean>(props.secureTextEntry || isPassword || false);
 
     return (
         <TouchableWithoutFeedback onPress={() => inputRef.current.focus()}>
