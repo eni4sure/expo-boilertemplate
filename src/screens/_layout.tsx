@@ -1,23 +1,18 @@
 import React from "react";
 import { useFonts } from "expo-font";
-import * as Sentry from "sentry-expo";
 import { StatusBar } from "expo-status-bar";
 import { Slot, SplashScreen } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { CONFIGS } from "@src/config";
+import { SentryManager } from "@src/utilities";
 
-export default function App() {
+// Setup Sentry
+SentryManager.init();
+
+function App() {
     const [queryClient] = React.useState(() => new QueryClient({ defaultOptions: { queries: { retry: false, refetchOnWindowFocus: false } } }));
-
-    // Initialise Sentry
-    Sentry.init({
-        dsn: CONFIGS.SENTRY.DSN,
-        debug: CONFIGS.SENTRY.DEBUG,
-        enableInExpoDevelopment: true,
-    });
 
     const [fontsLoaded] = useFonts({
         ...FontAwesome.font,
@@ -42,3 +37,5 @@ export default function App() {
         </>
     );
 }
+
+export default SentryManager.Native.wrap(App);

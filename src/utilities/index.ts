@@ -4,3 +4,5 @@
 export { withAuth, withoutAuth } from "./auth-guard";
 
 export { default as PersistStorage } from "./persist-storage";
+
+export { default as SentryManager } from "./sentry";
