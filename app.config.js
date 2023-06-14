@@ -43,6 +43,10 @@ module.exports = {
         // Any extra fields to pass to the app experience. Values are accessible via `Constants.expoConfig.extra`
         extra: {},
 
+        runtimeVersion: {
+            policy: "sdkVersion",
+        },
+
         // Configuration for how and when the app should request OTA JavaScript updates
         updates: {
             enabled: true,
@@ -50,6 +54,9 @@ module.exports = {
 
             // How long (in ms) to allow for fetching OTA updates before falling back to a cached version of the app. Defaults to 0. Must be between 0 and 300000 (5 minutes).
             fallbackToCacheTimeout: 60000, // 1 minute
+
+            // update url
+            // url: ""
         },
 
         // An array of file glob strings which point to assets that will be bundled within the standalone app binary.
@@ -58,6 +65,7 @@ module.exports = {
         // Config plugins for adding extra functionality.
         plugins: [
             // breaker
+            "sentry-expo",
             ["expo-build-properties", { android: { enableProguardInReleaseBuilds: true } }],
         ],
 
@@ -75,6 +83,22 @@ module.exports = {
 
         // Specifies the JavaScript engine for apps. Supported only on EAS Build.
         jsEngine: "hermes",
+
+        // Configuration for scripts to run to hook into the publish process
+        hooks: {
+            // Called before building the standalone app binary file. This script is passed the path to the generated native project directory.
+            postPublish: [
+                {
+                    file: "sentry-expo/upload-sourcemaps",
+                    config: {
+                        setCommits: true,
+                        organization: "eni4sure",
+                        project: "expo-boilertemplate",
+                        // TODO: set SENTRY_AUTH_TOKEN in eas secrets
+                    },
+                },
+            ],
+        },
 
         // Configuration that is specific to the iOS platform.
         ios: {

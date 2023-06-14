@@ -73,8 +73,8 @@ export default new PersistStorage();
 
 //     constructor() {
 //         this.storage = new MMKV({
-//             id: "credit-cliq",
-//             path: "credit-cliq",
+//             id: "expo-boilertemplate",
+//             path: "expo-boilertemplate",
 //             encryptionKey: "!8pHZa$EV7V5JVUwY7wU",
 //         });
 //     }

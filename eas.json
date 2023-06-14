@@ -1,18 +1,31 @@
 {
-  "cli": {
-    "version": ">= 3.13.2"
-  },
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
+    "cli": {
+        "version": ">= 3.13.2"
     },
-    "preview": {
-      "distribution": "internal"
+    "build": {
+        "development": {
+            "channel": "development",
+            "developmentClient": true,
+            "distribution": "internal"
+        },
+        "preview": {
+            "channel": "preview",
+            "distribution": "internal"
+        },
+        "production": {
+            "channel": "production"
+        }
     },
-    "production": {}
-  },
-  "submit": {
-    "production": {}
-  }
+    "submit": {
+        "production": {
+            "ios": {
+                "ascAppId": "",
+                "appleTeamId": "",
+                "appleId": ""
+            },
+            "android": {
+                "serviceAccountKeyPath": ""
+            }
+        }
+    }
 }
