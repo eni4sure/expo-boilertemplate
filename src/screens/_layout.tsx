@@ -94,4 +94,8 @@ function App() {
     );
 }
 
-export default SentryManager.Native.wrap(App);
+export default SentryManager.Native.wrap(App, {
+    touchEventBoundaryProps: {
+        ignoreNames: ["View"],
+    },
+});
