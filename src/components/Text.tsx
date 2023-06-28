@@ -1,6 +1,6 @@
 import { Text, TextProps } from "@rneui/base";
 
-interface CustomTextProp extends TextProps {
+export interface CustomTextProp extends TextProps {
     // other custom props here
 }
 

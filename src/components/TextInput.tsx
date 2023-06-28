@@ -3,7 +3,7 @@ import { Feather } from "@expo/vector-icons";
 import { Input, InputProps } from "@rneui/base";
 import { KeyboardTypeOptions, TouchableWithoutFeedback } from "react-native";
 
-interface CustomTextInputProp extends InputProps {
+export interface CustomTextInputProp extends InputProps {
     // other custom props here
     isPassword?: boolean;
     keyboardType: KeyboardTypeOptions;
