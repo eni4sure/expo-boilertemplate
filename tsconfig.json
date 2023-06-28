@@ -1,15 +1,11 @@
 {
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
-        "typeRoots": [
-            "./src/@types",
-            "./node_modules/@types"
-        ],
+        "typeRoots": ["./src/@types", "./node_modules/@types"],
         "baseUrl": "./",
         "paths": {
             "@src/*": ["./src/*"]
         },
-
         /* Type Checking */
         "strict": true,
         "noImplicitAny": true,
@@ -25,9 +21,7 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
         "noImplicitOverride": true,
-        "allowUnreachableCode": false,
+        "allowUnreachableCode": false
     },
-    "include": [
-        "./src/**/*"
-    ],
+    "include": ["./src/**/*"]
 }

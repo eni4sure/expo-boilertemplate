@@ -3,6 +3,14 @@
 // Custom HOC
 export { withAuth, withoutAuth } from "./auth-guard";
 
+// Custom Hooks
+export { default as useUser } from "./use-user";
+
+// Utilities Functions
+export { default as SentryManager } from "./sentry";
+
 export { default as PersistStorage } from "./persist-storage";
 
-export { default as SentryManager } from "./sentry";
+// Custom Methods
+import * as stringMethods from "./string-methods";
+export { stringMethods };

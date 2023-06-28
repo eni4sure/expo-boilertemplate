@@ -1,25 +1,18 @@
 import React from "react";
+
 import { View } from "react-native";
-import { Stack } from "@src/components";
-import { TextInput, Image, Text, Button } from "@src/components";
+import { Image, Text } from "@src/components";
+import { SafeAreaView } from "@src/components";
 
 function App() {
     return (
-        <View className="flex-1 justify-center mx-2">
-            <Stack direction="column" spacing={20}>
+        <SafeAreaView edges={["top", "right", "left", "bottom"]} className="flex-1">
+            <View className="flex-1 items-center justify-center space-y-10">
                 <Text>expo-boilertemplate !!</Text>
 
-                <View>
-                    <Button type="solid" title="Button" />
-                </View>
-
-                <View>
-                    <TextInput label="Text" placeholder="TextInput" keyboardType="default" inputContainerStyle={{ width: "100%" }} />
-                </View>
-
                 <Image source={require("@src/assets/expo/icon.png")} style={{ width: 100, height: 100 }} />
-            </Stack>
-        </View>
+            </View>
+        </SafeAreaView>
     );
 }
 

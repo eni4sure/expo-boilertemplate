@@ -1,6 +1,6 @@
 import { Image, ImageProps } from "@rneui/base";
 
-interface CustomImageProp extends ImageProps {
+export interface CustomImageProp extends ImageProps {
     // other custom props here
 }
 

@@ -1,6 +1,6 @@
 import { Button, ButtonProps } from "@rneui/base";
 
-interface CustomButtonProp extends ButtonProps {
+export interface CustomButtonProp extends ButtonProps {
     // other custom props here
     type: "solid" | "clear" | "outline";
     title: string | React.ReactElement<object>;
