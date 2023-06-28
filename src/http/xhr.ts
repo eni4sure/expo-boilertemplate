@@ -1,6 +1,7 @@
-import { CONFIGS } from "../config";
-import { PersistStorage } from "@src/utilities";
 import axios, { AxiosError, AxiosInstance } from "axios";
+
+import { CONFIGS } from "@src/config";
+import PersistStorage from "@src/utilities/persist-storage";
 
 const baseURL = CONFIGS.BACKEND_BASE_URL;
 
