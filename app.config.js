@@ -35,13 +35,17 @@ module.exports = {
         primaryColor: "#000000",
 
         // Local path or remote URL to an image to use for the app's icon. recommended 1024x1024 png file.
-        icon: "./src/assets/expo/icon.png",
+        icon: "./public/assets/expo/icon.png",
 
         // for standalone Apps Only. URL scheme to link into the app. For example, if set to 'demo', then demo:// URLs would open the app when tapped.
         scheme: "expo-boilertemplate",
 
         // Any extra fields to pass to the app experience. Values are accessible via `Constants.expoConfig.extra`
-        extra: {},
+        extra: {
+            eas: {
+                projectId: "", // TODO: set EAS_PROJECT_ID
+            },
+        },
 
         runtimeVersion: {
             policy: "sdkVersion",
@@ -59,13 +63,23 @@ module.exports = {
             // url: ""
         },
 
+        experiments: {
+            // Enable tsconfig/jsconfig compilerOptions.paths and compilerOptions.baseUrl support for import aliases in Metro.
+            tsconfigPaths: true,
+
+            // Enable support for statically typed links in Expo Router. requires TypeScript
+            typedRoutes: true,
+        },
+
         // An array of file glob strings which point to assets that will be bundled within the standalone app binary.
         assetBundlePatterns: ["**/*"],
 
         // Config plugins for adding extra functionality.
         plugins: [
             // breaker
+            "expo-router",
             "sentry-expo",
+            ["expo-local-authentication", { faceIDPermission: "Allow expo-boilertemplate to use Face ID." }],
             ["expo-build-properties", { android: { enableProguardInReleaseBuilds: true } }],
         ],
 
@@ -75,7 +89,7 @@ module.exports = {
             backgroundColor: "#ffffff",
 
             // Local path or remote URL to an image to fill the background of the loading screen. Image size and aspect ratio are up to you. Must be a .png.
-            image: "./src/assets/expo/splash.png",
+            image: "./public/assets/expo/splash.png",
 
             // Determines how the image will be displayed in the splash loading screen.
             resizeMode: "contain",
@@ -94,7 +108,6 @@ module.exports = {
                         setCommits: true,
                         organization: "eni4sure",
                         project: "expo-boilertemplate",
-                        // TODO: set SENTRY_AUTH_TOKEN in eas secrets
                     },
                 },
             ],
@@ -103,7 +116,7 @@ module.exports = {
         // Configuration that is specific to the iOS platform.
         ios: {
             // The bundle identifier for the app. This must be unique on the App Store.
-            bundleIdentifier: "com.eni4sure.expo-boilertemplate",
+            bundleIdentifier: process.env.NODE_ENV === "production" ? "com.eni4sure.expo-boilertemplate" : "com.eni4sure.expo-boilertemplate-dev",
 
             // Build number for the iOS standalone app
             buildNumber: "1",
@@ -131,14 +144,14 @@ module.exports = {
 
         android: {
             // The package name for the Android standalone app. This must be unique on the Play Store.
-            package: "com.eni4sure.expo-boilertemplate",
+            package: process.env.NODE_ENV === "production" ? "com.eni4sure.expo-boilertemplate" : "com.eni4sure.expo-boilertemplate-dev",
 
             // Version number required by Google Play. Increment by one for each release. Must be a positive integer.
             versionCode: 1,
 
             adaptiveIcon: {
                 // Local path or remote URL to an image to use for the app's icon on Android
-                foregroundImage: "./src/assets/expo/adaptive-icon.png",
+                foregroundImage: "./public/assets/expo/adaptive-icon.png",
 
                 // Color to use as the background for the app's Adaptive Icon on Android.
                 backgroundColor: "#ffffff",
@@ -146,6 +159,16 @@ module.exports = {
 
             // Including this key automatically enables FCM in the standalone app.
             // googleServicesFile: "./service-keys/google-services.json",
+        },
+
+        web: {
+            // Sets the bundler to use for the web platform. Only supported in the local CLI npx expo.
+            bundler: "metro",
+
+            output: "static",
+
+            // Relative path of an image to use for your app's favicon.
+            favicon: "./public/assets/expo/favicon.png",
         },
     },
 };

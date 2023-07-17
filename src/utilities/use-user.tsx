@@ -1,46 +1,36 @@
 import { useQuery } from "@tanstack/react-query";
 import jwt_decode, { JwtPayload } from "jwt-decode";
 
-import { APIGetCurrentUser } from "@src/http";
-import { state, useSnapshot } from "@src/state";
+import { APIVersion1GetCurrentUser } from "@/http";
+import { getItem } from "@/utilities/persist-storage";
 
 export default function useUser() {
-    const { authToken } = useSnapshot(state);
-
-    const {
-        isError,
-        isLoading,
-        isRefetching,
-        data: userQuery,
-        refetch,
-    } = useQuery(["auth-user"], APIGetCurrentUser, {
+    const { data: userQuery, ...utils } = useQuery(["auth-user"], APIVersion1GetCurrentUser, {
         cacheTime: Infinity,
         staleTime: 60000 * 10 /* 10 mins */,
     });
 
-    const isAuthenticated = !!authToken;
-    const isLoadingUser = isLoading || isRefetching;
+    const accessToken = getItem("access-token", "string") as string;
 
     let user = null;
 
-    if (isError && isAuthenticated) {
-        try {
-            const decodedToken: JwtPayload = jwt_decode(authToken || "");
-            delete decodedToken.iat;
-            delete decodedToken.exp;
+    try {
+        const decodedToken: JwtPayload = jwt_decode(accessToken || "");
+        delete decodedToken.iat;
+        delete decodedToken.exp;
 
-            user = decodedToken;
-        } catch (error) {
-            user = null;
-        }
-    } else {
+        user = decodedToken;
+    } catch (error) {
+        // do nothing, catches error like "invalid token", "token expired", etc
+    }
+
+    if (userQuery) {
         user = userQuery?.data || null;
     }
 
     return {
         user,
-        isLoadingUser,
-        isAuthenticated,
-        refreshAuthState: refetch,
+        isAuthenticated: !!accessToken,
+        ...utils,
     };
 }

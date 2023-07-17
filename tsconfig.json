@@ -4,7 +4,7 @@
         "typeRoots": ["./src/@types", "./node_modules/@types"],
         "baseUrl": "./",
         "paths": {
-            "@src/*": ["./src/*"]
+            "@/*": ["./src/*"]
         },
         /* Type Checking */
         "strict": true,
@@ -23,5 +23,5 @@
         "noImplicitOverride": true,
         "allowUnreachableCode": false
     },
-    "include": ["./src/**/*"]
+    "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

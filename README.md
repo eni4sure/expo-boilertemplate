@@ -1,4 +1,4 @@
-<img src="src/assets/expo/icon.png" height="100" width="100">
+<img src="public/assets/expo/icon.png" height="100" width="100">
 
 # expo-boilertemplate
 

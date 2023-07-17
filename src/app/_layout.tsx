@@ -1,27 +1,35 @@
 import React from "react";
 import axios from "axios";
+import "@/styles/globals.css";
+import { CONFIGS } from "@/config";
 import { useFonts } from "expo-font";
+import * as Sentry from "sentry-expo";
 import { StatusBar } from "expo-status-bar";
-import { FontAwesome } from "@expo/vector-icons";
-import * as SplashScreen from "expo-splash-screen";
-import { Stack, usePathname, useRouter } from "expo-router";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { enableFreeze, enableScreens } from "react-native-screens";
+import { Slot, SplashScreen, usePathname, useRouter } from "expo-router";
 import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { SentryManager } from "@src/utilities";
+export { ErrorBoundary } from "expo-router";
 
-// Prevent hiding the splash screen
+export const unstable_settings = {
+    initialRouteName: "index",
+};
+
+// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-// Initialize Sentry SDK
-// SentryManager.init();
+// Initialise Sentry
+Sentry.init({
+    dsn: CONFIGS.SENTRY.DSN,
+    debug: CONFIGS.SENTRY.DEBUG,
+    enableInExpoDevelopment: true,
 
-function App() {
-    // improve performance by using native navigation
-    enableFreeze(true);
-    enableScreens(true);
+    tracesSampleRate: 0.6,
+    integrations: [new Sentry.Native.ReactNativeTracing()],
+});
 
+function RootLayoutNavigation() {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -50,7 +58,10 @@ function App() {
                                     if (pathname !== "/auth/unauthorized") router.replace("/auth/unauthorized");
                                 }
 
+                                // this will run if the token is expired, and we've tried to refresh the token, but it's also expired
                                 if (error.response.data.message === "-middleware/token-expired") {
+                                    // update the message to the user
+                                    error.response.data.message = "Login session has expired. Please login again.";
                                     if (pathname !== "/auth/login") router.replace("/auth/login");
                                 }
                             }
@@ -60,42 +71,43 @@ function App() {
             })
     );
 
-    const [fontsLoaded] = useFonts({
+    return (
+        <Sentry.Native.TouchEventBoundary ignoreNames={["View"]}>
+            <StatusBar style="auto" />
+
+            <QueryClientProvider client={queryClient}>
+                <SafeAreaProvider style={{ flex: 1 }}>
+                    <Slot />
+                </SafeAreaProvider>
+            </QueryClientProvider>
+        </Sentry.Native.TouchEventBoundary>
+    );
+}
+
+export default function RootLayout() {
+    const [appIsReady, setAppIsReady] = React.useState(false);
+
+    const [fontsLoaded, fontLoadingError] = useFonts({
         ...FontAwesome.font,
 
         // custom fonts added here below
         // "lexendDeca-thin": require("../assets/fonts/LexendDeca-Thin.ttf"),
     });
 
-    const onLayoutRootView = React.useCallback(async () => {
-        if (fontsLoaded) {
-            await SplashScreen.hideAsync();
+    React.useEffect(() => {
+        if (fontsLoaded || fontLoadingError) {
+            SplashScreen.hideAsync();
+            setAppIsReady(true);
         }
-    }, [fontsLoaded]);
 
-    if (!fontsLoaded) {
+        if (fontLoadingError) {
+            throw fontLoadingError;
+        }
+    }, [fontsLoaded, fontLoadingError]);
+
+    if (appIsReady !== true) {
         return null;
     }
 
-    return (
-        <>
-            <StatusBar style="auto" />
-
-            <QueryClientProvider client={queryClient}>
-                <SafeAreaProvider style={{ flex: 1 }} onLayout={onLayoutRootView}>
-                    <Stack
-                        screenOptions={{
-                            headerShown: false,
-                        }}
-                    />
-                </SafeAreaProvider>
-            </QueryClientProvider>
-        </>
-    );
+    return <RootLayoutNavigation />;
 }
-
-export default SentryManager.Native.wrap(App, {
-    touchEventBoundaryProps: {
-        ignoreNames: ["View"],
-    },
-});

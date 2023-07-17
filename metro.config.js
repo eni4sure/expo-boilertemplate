@@ -1,7 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getDefaultConfig } = require("expo/metro-config");
 
-const config = getDefaultConfig(__dirname);
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname, {
+    // [Web-only]: Enables CSS support in Metro.
+    isCSSEnabled: true,
+});
+
+config.resolver.sourceExts.push("cjs", "mjs");
 
 const { transformer, resolver } = config;
 

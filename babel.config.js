@@ -1,16 +1,13 @@
-process.env.EXPO_ROUTER_APP_ROOT = "../../src/screens";
-
 module.exports = function (api) {
     api.cache(true);
-
     return {
         presets: ["babel-preset-expo"],
         plugins: [
-            // breaker
+            // Required for expo-router
+            "@babel/plugin-transform-export-namespace-from",
             "nativewind/babel",
-            ["module-resolver", { root: ["."], alias: { "@src": "./src" } }],
-            require.resolve("expo-router/babel"),
             "react-native-reanimated/plugin",
+            "expo-router/babel",
         ],
     };
 };
