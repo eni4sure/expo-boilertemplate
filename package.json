@@ -24,6 +24,7 @@
         "expo-application": "~5.3.0",
         "expo-asset": "~8.10.1",
         "expo-auth-session": "~5.0.2",
+        "expo-av": "~13.4.1",
         "expo-background-fetch": "~11.3.0",
         "expo-build-properties": "~0.8.3",
         "expo-clipboard": "~4.3.0",
