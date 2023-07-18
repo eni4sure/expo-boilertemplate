@@ -1,10 +1,18 @@
 {
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
-        "typeRoots": ["./src/@types", "./node_modules/@types"],
+        "typeRoots": [
+            "./src/@types",
+            "./node_modules/@types"
+        ],
         "baseUrl": "./",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": [
+                "./src/*"
+            ],
+            "@/assets/*": [
+                "./public/assets/*"
+            ],
         },
         /* Type Checking */
         "strict": true,
@@ -23,5 +31,10 @@
         "noImplicitOverride": true,
         "allowUnreachableCode": false
     },
-    "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+    "include": [
+        "**/*.ts",
+        "**/*.tsx",
+        ".expo/types/**/*.ts",
+        "expo-env.d.ts"
+    ]
 }

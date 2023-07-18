@@ -1,19 +1,31 @@
 {
     "cli": {
-        "version": ">= 3.13.2"
+        "version": ">= 3.13.3"
     },
     "build": {
         "development": {
             "channel": "development",
             "developmentClient": true,
-            "distribution": "internal"
+            "distribution": "internal",
+            "env": {
+                "APP_NAME": "expo-boilertemplate (Dev)",
+                "BUILD_IDENTIFIER": "com.eni4sure.expo-boilertemplate.dev",
+                "EXPO_PUBLIC_BACKEND_BASE_URL": "https://api.expo-boilertemplate.com"
+            }
         },
         "preview": {
             "channel": "preview",
-            "distribution": "internal"
+            "distribution": "internal",
+            "env": {
+                "APP_NAME": "expo-boilertemplate (Preview)",
+                "EXPO_PUBLIC_BACKEND_BASE_URL": "https://api.expo-boilertemplate.com"
+            },
         },
         "production": {
-            "channel": "production"
+            "channel": "production",
+            "env": {
+                "EXPO_PUBLIC_BACKEND_BASE_URL": "https://api.expo-boilertemplate.com"
+            }
         }
     },
     "submit": {

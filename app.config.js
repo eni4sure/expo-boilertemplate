@@ -2,7 +2,7 @@
 module.exports = {
     expo: {
         // The name of the app as it appears both within Expo Go and on the home screen as a standalone app.
-        name: "expo-boilertemplate",
+        name: process.env.APP_NAME || "expo-boilertemplate",
 
         // A short description of what the app is and why it is great.
         description: "expo-boilertemplate description",
@@ -116,7 +116,7 @@ module.exports = {
         // Configuration that is specific to the iOS platform.
         ios: {
             // The bundle identifier for the app. This must be unique on the App Store.
-            bundleIdentifier: process.env.NODE_ENV === "production" ? "com.eni4sure.expo-boilertemplate" : "com.eni4sure.expo-boilertemplate-dev",
+            bundleIdentifier: process.env.BUILD_IDENTIFIER || "com.eni4sure.expo-boilertemplate",
 
             // Build number for the iOS standalone app
             buildNumber: "1",
@@ -144,7 +144,7 @@ module.exports = {
 
         android: {
             // The package name for the Android standalone app. This must be unique on the Play Store.
-            package: process.env.NODE_ENV === "production" ? "com.eni4sure.expo-boilertemplate" : "com.eni4sure.expo-boilertemplate-dev",
+            package: process.env.BUILD_IDENTIFIER || "com.eni4sure.expo-boilertemplate",
 
             // Version number required by Google Play. Increment by one for each release. Must be a positive integer.
             versionCode: 1,
