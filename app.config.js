@@ -116,7 +116,7 @@ module.exports = {
         // Configuration that is specific to the iOS platform.
         ios: {
             // The bundle identifier for the app. This must be unique on the App Store.
-            bundleIdentifier: process.env.BUILD_IDENTIFIER || "com.eni4sure.expo-boilertemplate",
+            bundleIdentifier: "com.eni4sure.expo-boilertemplate",
 
             // Build number for the iOS standalone app
             buildNumber: "1",
@@ -144,7 +144,7 @@ module.exports = {
 
         android: {
             // The package name for the Android standalone app. This must be unique on the Play Store.
-            package: process.env.BUILD_IDENTIFIER || "com.eni4sure.expo-boilertemplate",
+            package: "com.eni4sure.expo-boilertemplate",
 
             // Version number required by Google Play. Increment by one for each release. Must be a positive integer.
             versionCode: 1,

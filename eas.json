@@ -9,7 +9,6 @@
             "distribution": "internal",
             "env": {
                 "APP_NAME": "expo-boilertemplate (Dev)",
-                "BUILD_IDENTIFIER": "com.eni4sure.expo-boilertemplate.dev",
                 "EXPO_PUBLIC_BACKEND_BASE_URL": "https://api.expo-boilertemplate.com"
             }
         },
